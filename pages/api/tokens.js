@@ -7,7 +7,7 @@ const handler = nextConnect();
 const sofiSymbols = ['alex','kerman','joon','ksk','pew','magic','boi','rac','first','yachty','pump','whale','hue','skull','osina','rare','coin','seed','rng','yup','ladz','jamm','fwb','1337','swagg','robot','vnchr','dsgn','ven','rcle','cnsl','karma','ddim','uwl','cherry','gen','ant']
 const nameFilter = ['coinvest', 'aragon', 'daostack', 'whale-coin']
 
-const main = async () => {
+export const main = async () => {
     // filter out sofi tokens from coingecko feed
     const { data } = await axios.get('https://api.coingecko.com/api/v3/coins/list')
     const sofiTokens = data.filter(token => sofiSymbols.includes(token.symbol) && !nameFilter.includes(token.id))
@@ -37,7 +37,6 @@ const main = async () => {
 
     const sofiIndex = sortedSofi.slice(0,11)
 
-    console.log(sofiIndex);
     return sofiIndex
 }
 

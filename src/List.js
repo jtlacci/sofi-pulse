@@ -11,6 +11,7 @@ import Card from '@material-ui/core/Card';
 import axios from 'axios'
 import { useEffect, useState } from 'react';
 import { Typography } from '@material-ui/core';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 const useStyles = makeStyles({
   table: {
@@ -26,26 +27,27 @@ const useStyles = makeStyles({
 });
 
 
-export default function BasicTable() {
+export default function BasicTable({initialData}) {
   const classes = useStyles();
+  const isDesktop = useMediaQuery('(min-width:600px)');
 
-  const [ rows, setRows ] = useState([]);
+  const [ rows, setRows ] = useState(initialData || []);
 
   useEffect( async () => {
+    console.log(initialData);
     const { data } = await axios.get('/api/tokens')
     setRows(data);
-    console.log(data);
   }, []);
 
   return (
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow component={Card}>
-            <TableCell align="left">SOFI PULSE</TableCell>
+            <TableCell align="center">SOFI PULSE</TableCell>
             <TableCell align="left">Name</TableCell>
-            <TableCell align="left">Chain</TableCell>
+            {isDesktop && <TableCell align="left">Chain</TableCell>}
             <TableCell align="left">Symbol</TableCell>
-            <TableCell align="left">MarketCap</TableCell>
+            {isDesktop && <TableCell align="left">MarketCap</TableCell>}
             <TableCell align="right">1 Day %</TableCell>
           </TableRow>
         </TableHead>
@@ -56,9 +58,9 @@ export default function BasicTable() {
                 {index + 1}
               </TableCell>
               <TableCell align="left">{row.name}</TableCell>
-              <TableCell align="left">{'Ethereum'}</TableCell>
-              <TableCell align="left">{'$' + row.symbol.toUpperCase()}</TableCell>
-              <TableCell align="left">{'$' + Number(row.marketcap).toLocaleString()}</TableCell>
+              {isDesktop && <TableCell align="left">{'Ethereum'}</TableCell>}
+              <TableCell align="left">{'$' + row.symbol?.toUpperCase()}</TableCell>
+              {isDesktop && <TableCell align="left">{'$' + Number(row.marketcap).toLocaleString()}</TableCell>}
               <TableCell className={(Number(row.dayChange) > 0) ? classes.green : classes.red} align="right">{(row.dayChange?.toFixed(2) || '?') + '%' }</TableCell>
             </TableRow>
           ))}
