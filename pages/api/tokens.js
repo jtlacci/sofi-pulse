@@ -4,7 +4,7 @@ import _ from 'lodash'
 
 const handler = nextConnect();
 
-const sofiSymbols = ['alex','kerman','joon','ksk','pew','magic','boi','rac','first','yachty','pump','whale','hue','skull','osina','rare','coin','seed','rng','yup','ladz','jamm','fwb','1337','swagg','robot','vnchr','dsgn','ven','rcle','cnsl','karma','ddim','uwl','cherry','gen','ant']
+const sofiSymbols = ['audio','alex','kerman','joon','ksk','pew','magic','boi','rac','first','yachty','pump','whale','hue','skull','osina','rare','coin','seed','rng','yup','ladz','jamm','fwb','1337','swagg','robot','vnchr','dsgn','ven','rcle','cnsl','karma','ddim','uwl','cherry','gen','ant']
 const nameFilter = ['coinvest', 'aragon', 'daostack', 'whale-coin']
 
 export const main = async () => {
